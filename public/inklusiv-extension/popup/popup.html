@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INKLUSIV Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="header-content">
+        <h1 class="popup-title">INKLUSIV</h1>
+        <p class="popup-subtitle">Accessibility Settings</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="popup-main">
+      <!-- Input Methods Section -->
+      <section class="settings-section">
+        <h2 class="section-title">Input Methods</h2>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="voice-toggle">Voice Input</label>
+              <p class="setting-description">Enable voice commands and speech-to-text input</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="voice-toggle" data-feature="voiceInput">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="gesture-toggle">Gesture Input</label>
+              <p class="setting-description">Control pages with hand gestures using your camera</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="gesture-toggle" data-feature="gestureInput">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reading & Text Section -->
+      <section class="settings-section">
+        <h2 class="section-title">Reading & Text</h2>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="dyslexia-toggle">Dyslexia-Friendly Font</label>
+              <p class="setting-description">Use OpenDyslexic font for better readability</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="dyslexia-toggle" data-feature="dyslexiaFont">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="tts-toggle">Text-to-Speech</label>
+              <p class="setting-description">Read text aloud when hovering or selecting</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="tts-toggle" data-feature="textToSpeech">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Visual & Display Section -->
+      <section class="settings-section">
+        <h2 class="section-title">Visual & Display</h2>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="contrast-toggle">High Contrast</label>
+              <p class="setting-description">Increase contrast for better visibility</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="contrast-toggle" data-feature="highContrast">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="dark-toggle">Dark Mode</label>
+              <p class="setting-description">Dark theme to reduce eye strain</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="dark-toggle" data-feature="darkMode">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="colorblind-select">Color Vision Filter</label>
+              <p class="setting-description">Apply filters for different types of color blindness</p>
+            </div>
+            <div class="setting-control">
+              <select id="colorblind-select" class="setting-select" data-feature="colorblindMode">
+                <option value="none">No Filter</option>
+                <option value="protanopia">Protanopia (Red-blind)</option>
+                <option value="deuteranopia">Deuteranopia (Green-blind)</option>
+                <option value="tritanopia">Tritanopia (Blue-blind)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Focus & Attention Section -->
+      <section class="settings-section">
+        <h2 class="section-title">Focus & Attention</h2>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-info">
+              <label class="setting-label" for="adhd-toggle">ADHD-Friendly Mode</label>
+              <p class="setting-description">Hide distractions and improve focus</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="adhd-toggle" data-feature="adhdMode">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Help Section -->
+      <section class="settings-section">
+        <h2 class="section-title">Help & Information</h2>
+        <div class="help-content">
+          <div class="help-item">
+            <h3 class="help-title">Voice Commands</h3>
+            <p class="help-text">Say "help" while voice input is active to see available commands.</p>
+          </div>
+          <div class="help-item">
+            <h3 class="help-title">Gesture Controls</h3>
+            <p class="help-text">Point to scroll, peace sign to scroll up, OK gesture to click, fist to go back.</p>
+          </div>
+          <div class="help-item">
+            <h3 class="help-title">Widget</h3>
+            <p class="help-text">The floating widget appears on all pages. Drag it to move, click to expand controls.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <div class="footer-content">
+        <button id="save-settings" class="btn btn-primary">Save Settings</button>
+        <button id="reset-settings" class="btn btn-secondary">Reset to Defaults</button>
+      </div>
+      <div class="footer-info">
+        <p class="version-info">INKLUSIV v1.0.0</p>
+        <p class="status-message" id="status-message"></p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
