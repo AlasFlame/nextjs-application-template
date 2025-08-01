@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INKLUSIV Extension Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #ffffff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav {
+      background: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #007acc;
+    }
+
+    /* Main Content */
+    .main {
+      padding: 60px 0;
+    }
+
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: #666;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Demo Grid */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .demo-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .demo-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #007acc;
+    }
+
+    .demo-card p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Form Demo */
+    .form-demo {
+      background: #f8fafc;
+      padding: 40px;
+      border-radius: 12px;
+      margin: 40px 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: #007acc;
+      box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: #007acc;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #005a9e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #007acc;
+      border: 2px solid #007acc;
+    }
+
+    .btn-secondary:hover {
+      background: #007acc;
+      color: white;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    /* Content Sections */
+    .content-section {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin: 30px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .content-section h3 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .content-section p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+
+    /* Image Gallery */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .image-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .image-item:hover {
+      transform: scale(1.05);
+    }
+
+    .image-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-caption {
+      padding: 15px;
+      background: white;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Instructions */
+    .instructions {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 40px;
+      border-radius: 12px;
+      margin: 40px 0;
+      border-left: 4px solid #007acc;
+    }
+
+    .instructions h3 {
+      color: #007acc;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .instructions ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .instructions li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .instructions li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: white;
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+
+    .footer h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer p {
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .header p {
+        font-size: 1rem;
+      }
+
+      .nav-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    /* Accessibility Enhancements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Focus styles */
+    *:focus {
+      outline: 2px solid #007acc;
+      outline-offset: 2px;
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .demo-card {
+        border: 2px solid #000;
+      }
+      
+      .btn {
+        border: 2px solid currentColor;
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1>INKLUSIV Extension Demo</h1>
+      <p>Experience accessibility features in action. Test voice commands, gesture controls, and visual enhancements on this demo page.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <strong>INKLUSIV Demo</strong>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#form-demo">Form Demo</a></li>
+          <li><a href="#content">Content</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <!-- Instructions Section -->
+      <section class="instructions">
+        <h3>How to Test INKLUSIV Features</h3>
+        <ul>
+          <li>Install the INKLUSIV extension and look for the floating widget in the bottom-right corner</li>
+          <li>Click the widget to expand accessibility controls</li>
+          <li>Try voice commands: "focus search", "type hello world", "scroll down", "click submit"</li>
+          <li>Enable gesture input and use hand gestures: point to scroll, peace sign to scroll up, OK to click</li>
+          <li>Test accessibility features: dyslexia font, text-to-speech, high contrast, dark mode</li>
+          <li>Hover over text with TTS enabled to hear it read aloud</li>
+          <li>Use the colorblind filters to see how they affect the page appearance</li>
+        </ul>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="section">
+        <h2 class="section-title">Accessibility Features</h2>
+        <p class="section-subtitle">
+          INKLUSIV provides comprehensive accessibility tools to make the web more inclusive for everyone.
+        </p>
+
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Voice Input</h3>
+            <p>Control your browser with voice commands. Fill forms, navigate pages, and interact with elements using natural speech.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testVoiceCommand()">Test Voice</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Gesture Control</h3>
+            <p>Use hand gestures to navigate and interact with web pages. Point, click, and scroll using your camera.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testGesture()">Test Gestures</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Text-to-Speech</h3>
+            <p>Have text read aloud as you hover over or select content. Perfect for users with reading difficulties.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testTTS()">Test TTS</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Visual Enhancements</h3>
+            <p>High contrast mode, dark theme, dyslexia-friendly fonts, and colorblind filters for better visibility.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testVisual()">Test Visual</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Focus Mode</h3>
+            <p>ADHD-friendly mode that reduces distractions, hides animations, and improves content focus.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testFocus()">Test Focus</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Customizable Widget</h3>
+            <p>Floating accessibility widget that can be moved around the page and provides quick access to all features.</p>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="testWidget()">Test Widget</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Demo Section -->
+      <section id="form-demo" class="section">
+        <h2 class="section-title">Interactive Form Demo</h2>
+        <p class="section-subtitle">
+          Test voice input and accessibility features with this sample form. Try saying "focus email" or "type your message".
+        </p>
+
+        <div class="form-demo">
+          <form id="demo-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="country">Country</label>
+                <select id="country" name="country" class="form-select">
+                  <option value="">Select your country</option>
+                  <option value="us">United States</option>
+                  <option value="ca">Canada</option>
+                  <option value="uk">United Kingdom</option>
+                  <option value="au">Australia</option>
+                  <option value="de">Germany</option>
+                  <option value="fr">France</option>
+                  <option value="jp">Japan</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message here..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <input type="checkbox" id="newsletter" name="newsletter" style="margin-right: 8px;">
+                Subscribe to newsletter
+              </label>
+            </div>
+
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">Submit Form</button>
+              <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Content Section -->
+      <section id="content" class="section">
+        <h2 class="section-title">Sample Content for TTS Testing</h2>
+        <p class="section-subtitle">
+          Hover over the text below with Text-to-Speech enabled to hear it read aloud.
+        </p>
+
+        <div class="content-section">
+          <h3>The Importance of Web Accessibility</h3>
+          <p>
+            Web accessibility ensures that websites, tools, and technologies are designed and developed 
+            so that people with disabilities can use them. More specifically, people can perceive, 
+            understand, navigate, and interact with the Web, and they can contribute to the Web.
+          </p>
+          <p>
+            Accessibility encompasses all disabilities that affect access to the Web, including 
+            auditory, cognitive, neurological, physical, speech, and visual disabilities. 
+            Accessibility also benefits people without disabilities, for example, people using 
+            mobile phones, smart watches, smart TVs, and other devices with small screens.
+          </p>
+          <p>
+            The Web is fundamentally designed to work for all people, whatever their hardware, 
+            software, language, location, or ability. When the Web meets this goal, it is 
+            accessible to people with a diverse range of hearing, movement, sight, and 
+            cognitive ability.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h3>INKLUSIV Features in Detail</h3>
+          <p>
+            INKLUSIV provides a comprehensive suite of accessibility tools designed to make 
+            web browsing more inclusive. The extension includes voice recognition capabilities 
+            that allow users to navigate and interact with web pages using natural speech commands.
+          </p>
+          <p>
+            The gesture recognition feature uses advanced computer vision to track hand movements, 
+            enabling users to control their browser through intuitive gestures. This is particularly 
+            useful for users who may have difficulty using traditional input methods.
+          </p>
+          <p>
+            Visual accessibility features include high contrast modes, dark themes, dyslexia-friendly 
+            fonts, and color vision filters. These tools help users with various visual impairments 
+            or preferences to better perceive and interact with web content.
+          </p>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery" class="section">
+        <h2 class="section-title">Image Gallery</h2>
+        <p class="section-subtitle">
+          Test colorblind filters and visual enhancements with these sample images.
+        </p>
+
+        <div class="image-gallery">
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f314f488-7439-46bc-8b0c-e0316423f97a.png" alt="Colorful accessibility interface design with vibrant blues and greens" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Accessibility interface with vibrant colors</div>
+          </div>
+          
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3dac357a-b7de-4448-a0bd-18a97b390a50.png" alt="Modern web design dashboard with clean typography and contrast" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Clean dashboard design with good contrast</div>
+          </div>
+          
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb1d11ee-c157-4390-817c-d2bb92fdd21e.png" alt="Voice recognition technology visualization with sound waves" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Voice recognition technology visualization</div>
+          </div>
+          
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b92c031f-d94e-419e-87dc-e599373701f3.png" alt="Hand gesture tracking interface with computer vision overlay" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Gesture tracking interface demonstration</div>
+          </div>
+          
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0309e4d4-e201-41f8-aa65-047e9cb63e08.png" alt="Inclusive design principles infographic with accessibility symbols" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Inclusive design principles and symbols</div>
+          </div>
+          
+          <div class="image-item">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ae49845-7dbb-4e96-8fe5-ba466d17428d.png" alt="Text to speech visualization with audio waveforms and text" onerror="this.onerror=null; this.style.background='#f0f0f0'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.textContent='Image placeholder';">
+            <div class="image-caption">Text-to-speech technology visualization</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <h3>INKLUSIV Extension</h3>
+      <p>Making the web accessible for everyone through innovative technology and inclusive design.</p>
+      
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#form-demo">Demo</a>
+        <a href="#content">Content</a>
+        <a href="#gallery">Gallery</a>
+      </div>
+      
+      <p>&copy; 2024 INKLUSIV Extension. Built for accessibility and inclusion.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Demo page JavaScript functionality
+    
+    // Form submission handler
+    document.getElementById('demo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form submitted successfully! This is just a demo.');
+    });
+
+    // Test functions for demo buttons
+    function testVoiceCommand() {
+      alert('Voice input test: Try saying "focus email" or "type hello world" when voice input is enabled in the INKLUSIV widget.');
+    }
+
+    function testGesture() {
+      alert('Gesture test: Enable gesture input in the INKLUSIV widget, then try pointing to scroll or making an OK gesture to click.');
+    }
+
+    function testTTS() {
+      alert('Text-to-Speech test: Enable TTS in the INKLUSIV widget, then hover over any text on this page to hear it read aloud.');
+    }
+
+    function testVisual() {
+      alert('Visual enhancements test: Use the INKLUSIV widget to toggle high contrast, dark mode, or dyslexia-friendly fonts.');
+    }
+
+    function testFocus() {
+      alert('Focus mode test: Enable ADHD-friendly mode in the INKLUSIV widget to reduce distractions and improve focus.');
+    }
+
+    function testWidget() {
+      alert('Widget test: Look for the floating INKLUSIV widget (usually in the bottom-right corner). Click to expand and drag to move.');
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add some interactive elements for testing
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click handlers to buttons for testing
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        if (!button.onclick) {
+          button.addEventListener('click', function() {
+            console.log('Button clicked:', this.textContent);
+          });
+        }
+      });
+
+      // Add focus indicators for accessibility testing
+      const focusableElements = document.querySelectorAll('input, textarea, select, button, a');
+      focusableElements.forEach(element => {
+        element.addEventListener('focus', function() {
+          console.log('Element focused:', this.tagName, this.id || this.className);
+        });
+      });
+
+      // Log page load for extension testing
+      console.log('INKLUSIV Demo page loaded. Extension should inject the accessibility widget.');
+    });
+
+    // Test voice commands (for demonstration)
+    const voiceCommands = [
+      'focus search',
+      'focus email', 
+      'focus name',
+      'type hello world',
+      'clear field',
+      'scroll down',
+      'scroll up',
+      'click submit',
+      'toggle dark mode',
+      'help'
+    ];
+
+    // Display available voice commands in console
+    console.log('Available voice commands for testing:', voiceCommands);
+
+    // Keyboard shortcuts for testing
+    document.addEventListener('keydown', function(e) {
+      // Ctrl/Cmd + Shift + T for TTS test
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+        e.preventDefault();
+        testTTS();
+      }
+      
+      // Ctrl/Cmd + Shift + V for voice test
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'V') {
+        e.preventDefault();
+        testVoiceCommand();
+      }
+      
+      // Ctrl/Cmd + Shift + G for gesture test
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'G') {
+        e.preventDefault();
+        testGesture();
+      }
+    });
+  </script>
+</body>
+</html>
